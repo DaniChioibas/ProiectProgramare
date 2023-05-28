@@ -1,7 +1,11 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
 #include "../Shared/Data/data.h"
 #include "../Shared/Data/ora.h"
+#include "../Shared/Data/oferta.h"
+#include "../Shared/Data/programare.h"
 using namespace std;
 void optiuni();
 void catalog_oferte();
@@ -41,5 +45,25 @@ void catalog_oferte()
 }
 void programari_toate()
 {
-    cout << "Acestea sunt toate programarile: ";
+    ifstream input;
+    cout << "Acestea sunt toate programarile: \n";
+    input.open("../Shared/Files/programari.txt");
+    if (!input.is_open())
+        return;
+    string line;
+    vector<string> L;
+    int ok = 0;
+    while (!input.eof())
+    {
+        if (line == "---")
+        {
+            vector<string>::iterator it;
+            for (it = L.begin(); it != L.end(); it++)
+                cout << *it << endl;
+            L.clear();
+        }
+        getline(input, line);
+        L.push_back(line);
+    }
+    input.close();
 }
