@@ -68,7 +68,16 @@ void catalog_oferte(int argc, char *argv[])
         cout << "Argument invalid. Foloseste ./app2 catalog_oferte";
         return;
     }
-    cout << "Acesta este catalogul cu oferte: ";
+    cout << "--(Acesta este catalogul cu oferte)-- \n";
+    ifstream input;
+    input.open("../Shared/Files/oferte.txt");
+    if (!input.is_open())
+        return;
+    string linie;
+    getline(input, linie);
+    cout << "Exista " << linie << " oferte diferite:\n";
+    while (getline(input, linie))
+        cout << linie << "\n";
 }
 void programari_toate(int argc, char *argv[])
 {

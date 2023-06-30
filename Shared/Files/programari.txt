@@ -11,9 +11,3 @@ Pending
 1 TunsPeriuta 15 9.99
 1 TunsPeriuta 15 9.99
 ---
-<data><ora>
-<numepersoana>
-<status>
-<numarOferte>
-<Oferta1>
-<Oferta2>

@@ -1,2 +1,6 @@
-1
-1 TunsPeriuta 15 9.99
+5
+1 Tuns_Periuta 15 9.99
+2 Tuns_Faded 30 49.99
+3 Barbierit_Total 10 30
+4 Barbierit_Fade 10 40
+5 Spalat 5 14.99
