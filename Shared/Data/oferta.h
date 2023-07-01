@@ -15,7 +15,7 @@ class Oferta
 public:
     Oferta(string &inputString)
     {
-        std::istringstream iss(inputString);
+        istringstream iss(inputString);
         iss >> id >> nume >> durata >> pret;
     }
     void afisare()

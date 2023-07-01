@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <regex>
 #include "../Shared/Data/data.h"
 #include "../Shared/Data/ora.h"
 #include "../Shared/Data/oferta.h"
@@ -57,15 +58,100 @@ void programari(int argc, char *argv[])
     if (argc != 3)
     {
         cout << "Argument invalid. Foloseste ./app2 programari <data>";
-        cout << " Ex <data>";
+        cout << " |Ex <data>=12.12.2012";
         return;
     }
     vector<Programare *> Programari;
     string data = argv[2];
+    regex pattern("\\d{1,2}\\.\\d{1,2}\\.\\d{4}");
+    if (!regex_match(data, pattern))
+    {
+        cout << "Argument invalid. Nu ai introdus o data valida. Foloseste ./app2 programari <data>";
+        cout << " |Ex <data>=12.12.2012";
+        return;
+    }
+
     ifstream input;
     input.open("../Shared/Files/programari.txt");
     Data A(data);
+    if (A.getZi() > 31 || A.getLuna() > 12)
+    {
+        cout << "Argument invalid. Nu ai introdus o data valida. Foloseste ./app2 programari <data>";
+        cout << " |Ex <data>=12.12.2012";
+        return;
+    }
     vector<string> Oferte;
+    string linie;
+    ///
+    do
+    {
+        string dataa;
+        getline(input, dataa);
+        if (input.eof())
+            break;
+        Data A(dataa);
+        string ora;
+        getline(input, ora);
+        Ora B(ora);
+        string nume;
+        getline(input, nume);
+        string status;
+        getline(input, status);
+        string nr;
+        getline(input, nr);
+        int nrOferte = stoi(nr);
+        Programare *tmp2 = new Programare(nume, status, A, B, nrOferte);
+        for (int i = 0; i < nrOferte; i++)
+        {
+            string l;
+            getline(input, l);
+            Oferta *tmp = new Oferta(l);
+            tmp2->adaugaOferta(tmp);
+        }
+        Programari.push_back(tmp2);
+    } while (getline(input, linie));
+    cout << "Programarile dupa data <" << data << "> sunt: \n";
+    for (auto et : Programari)
+    {
+        if (data < et->getData())
+        {
+            et->afisare();
+            cout << endl;
+        }
+    }
+}
+void catalog_oferte(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        cout << "Argument invalid. Foloseste ./app2 catalog_oferte";
+        return;
+    }
+    cout << "--(Acesta este catalogul cu oferte)-- \n";
+    ifstream input;
+    input.open("../Shared/Files/oferte.txt");
+    if (!input.is_open())
+        return;
+    string linie;
+    getline(input, linie);
+    cout << "Exista " << linie << " oferte diferite:\n";
+    while (getline(input, linie))
+        cout << linie << "\n";
+}
+void programari_toate(int argc, char *argv[])
+{
+    if (argc != 2)
+    {
+        cout << "Argument invalid. Foloseste ./app2 programari_toate";
+        return;
+    }
+    ifstream input;
+    vector<string> Oferte;
+    vector<Programare *> Programari;
+    cout << "Acestea sunt toate programarile: \n";
+    input.open("../Shared/Files/programari.txt");
+    if (!input.is_open())
+        return;
     string linie;
     ///
     do
@@ -100,38 +186,4 @@ void programari(int argc, char *argv[])
         et->afisare();
         cout << endl;
     }
-}
-void catalog_oferte(int argc, char *argv[])
-{
-    if (argc != 2)
-    {
-        cout << "Argument invalid. Foloseste ./app2 catalog_oferte";
-        return;
-    }
-    cout << "--(Acesta este catalogul cu oferte)-- \n";
-    ifstream input;
-    input.open("../Shared/Files/oferte.txt");
-    if (!input.is_open())
-        return;
-    string linie;
-    getline(input, linie);
-    cout << "Exista " << linie << " oferte diferite:\n";
-    while (getline(input, linie))
-        cout << linie << "\n";
-}
-void programari_toate(int argc, char *argv[])
-{
-    if (argc != 2)
-    {
-        cout << "Argument invalid. Foloseste ./app2 programari_toate";
-        return;
-    }
-    ifstream input;
-    cout << "Acestea sunt toate programarile: \n";
-    input.open("../Shared/Files/programari.txt");
-    if (!input.is_open())
-        return;
-    string linie;
-    while (getline(input, linie))
-        cout << linie << "\n";
 }

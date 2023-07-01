@@ -17,6 +17,10 @@ class Programare
     vector<Oferta *> oferte;
 
 public:
+    Data getData()
+    {
+        return this->data;
+    }
     void adaugaOferta(Oferta *tmp)
     {
         this->oferte.push_back(tmp);

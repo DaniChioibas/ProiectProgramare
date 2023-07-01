@@ -36,7 +36,34 @@ public:
         }
         return *this;
     }
+    friend bool operator<(const Data &, const Data &);
 };
+bool operator<(const Data &lhs, const Data &rhs)
+{
+    if (lhs.an < rhs.an)
+    {
+        return true;
+    }
+    else if (lhs.an > rhs.an)
+    {
+        return false;
+    }
+    else
+    {
+        if (lhs.luna < rhs.luna)
+        {
+            return true;
+        }
+        else if (lhs.luna > rhs.luna)
+        {
+            return false;
+        }
+        else
+        {
+            return lhs.zi < rhs.zi;
+        }
+    }
+}
 Data::Data(string dateString)
 {
     istringstream iss(dateString);
