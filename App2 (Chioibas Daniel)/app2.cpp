@@ -85,13 +85,15 @@ void programari(int argc, char *argv[])
         string nr;
         getline(input, nr);
         int nrOferte = stoi(nr);
+        Programare *tmp2 = new Programare(nume, status, A, B, nrOferte);
         for (int i = 0; i < nrOferte; i++)
         {
             string l;
             getline(input, l);
+            Oferta *tmp = new Oferta(l);
+            tmp2->adaugaOferta(tmp);
         }
-        Programare *tmp = new Programare(nume, status, A, B, nrOferte);
-        Programari.push_back(tmp);
+        Programari.push_back(tmp2);
     } while (getline(input, linie));
     for (auto et : Programari)
     {

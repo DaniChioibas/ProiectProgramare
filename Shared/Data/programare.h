@@ -14,12 +14,14 @@ class Programare
     Data data;
     Ora ora;
     int nrOferte;
-    Oferta *oferte;
+    vector<Oferta *> oferte;
 
 public:
-    Programare(vector<string>);
+    void adaugaOferta(Oferta *tmp)
+    {
+        this->oferte.push_back(tmp);
+    }
     Programare(string, string, Data, Ora, int);
-    ~Programare();
     void afisare()
     {
         cout << this->data << endl;
@@ -27,6 +29,11 @@ public:
         cout << this->nume << endl;
         cout << this->status << endl;
         cout << this->nrOferte << endl;
+        for (auto et : oferte)
+        {
+            et->afisare();
+            cout << endl;
+        }
     }
 };
 Programare::Programare(string nume, string status, Data data, Ora ora, int nrOferte)
@@ -36,21 +43,4 @@ Programare::Programare(string nume, string status, Data data, Ora ora, int nrOfe
     this->data = data;
     this->ora = ora;
     this->nrOferte = nrOferte;
-}
-Programare::Programare(vector<string> P)
-{
-    this->nume = nume;
-    this->status = status;
-    this->data.setAn(data.getAn());
-    this->data.setLuna(data.getLuna());
-    this->data.setZi(data.getZi());
-    this->data.setNumeZi(data.getNumeZi());
-    this->ora.setMinute(ora.getMinute());
-    this->ora.setOra(ora.getOra());
-    this->nrOferte = nrOferte;
-    this->oferte = new Oferta[nrOferte];
-}
-Programare::~Programare()
-{
-    delete[] this->oferte;
 }

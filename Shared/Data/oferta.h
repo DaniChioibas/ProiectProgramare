@@ -11,36 +11,54 @@ class Oferta
     int id;
     int durata;
     double pret;
+
 public:
-    string getNume() const {
+    Oferta(string &inputString)
+    {
+        std::istringstream iss(inputString);
+        iss >> id >> nume >> durata >> pret;
+    }
+    void afisare()
+    {
+        cout << this->id << " " << this->nume << " " << this->durata << " " << this->pret;
+    }
+    string getNume() const
+    {
         return nume;
     }
 
-    void setNume(const string& newNume) {
+    void setNume(const string &newNume)
+    {
         nume = newNume;
     }
 
-    int getId() const {
+    int getId() const
+    {
         return id;
     }
 
-    void setId(int newId) {
+    void setId(int newId)
+    {
         id = newId;
     }
 
-    int getDurata() const {
+    int getDurata() const
+    {
         return durata;
     }
 
-    void setDurata(int newDurata) {
+    void setDurata(int newDurata)
+    {
         durata = newDurata;
     }
 
-    double getPret() const {
+    double getPret() const
+    {
         return pret;
     }
 
-    void setPret(double newPret) {
+    void setPret(double newPret)
+    {
         pret = newPret;
     }
 };
