@@ -60,6 +60,44 @@ void programari(int argc, char *argv[])
         cout << " Ex <data>";
         return;
     }
+    vector<Programare *> Programari;
+    string data = argv[2];
+    ifstream input;
+    input.open("../Shared/Files/programari.txt");
+    Data A(data);
+    vector<string> Oferte;
+    string linie;
+    ///
+    do
+    {
+        string dataa;
+        getline(input, dataa);
+        if (input.eof())
+            break;
+        Data A(dataa);
+        string ora;
+        getline(input, ora);
+        Ora B(ora);
+        string nume;
+        getline(input, nume);
+        string status;
+        getline(input, status);
+        string nr;
+        getline(input, nr);
+        int nrOferte = stoi(nr);
+        for (int i = 0; i < nrOferte; i++)
+        {
+            string l;
+            getline(input, l);
+        }
+        Programare *tmp = new Programare(nume, status, A, B, nrOferte);
+        Programari.push_back(tmp);
+    } while (getline(input, linie));
+    for (auto et : Programari)
+    {
+        et->afisare();
+        cout << endl;
+    }
 }
 void catalog_oferte(int argc, char *argv[])
 {
@@ -91,20 +129,7 @@ void programari_toate(int argc, char *argv[])
     input.open("../Shared/Files/programari.txt");
     if (!input.is_open())
         return;
-    string line;
-    vector<string> L;
-    int ok = 0;
-    while (!input.eof())
-    {
-        if (line == "---")
-        {
-            vector<string>::iterator it;
-            for (it = L.begin(); it != L.end(); it++)
-                cout << *it << endl;
-            L.clear();
-        }
-        getline(input, line);
-        L.push_back(line);
-    }
-    input.close();
+    string linie;
+    while (getline(input, linie))
+        cout << linie << "\n";
 }
