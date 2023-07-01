@@ -20,19 +20,22 @@ public:
     Programare(vector<string>);
     Programare(string, string, Data, Ora, int);
     ~Programare();
+    void afisare()
+    {
+        cout << this->data << endl;
+        cout << this->ora << endl;
+        cout << this->nume << endl;
+        cout << this->status << endl;
+        cout << this->nrOferte << endl;
+    }
 };
 Programare::Programare(string nume, string status, Data data, Ora ora, int nrOferte)
 {
     this->nume = nume;
     this->status = status;
-    this->data.setAn(data.getAn());
-    this->data.setLuna(data.getLuna());
-    this->data.setZi(data.getZi());
-    this->data.setNumeZi(data.getNumeZi());
-    this->ora.setMinute(ora.getMinute());
-    this->ora.setOra(ora.getOra());
+    this->data = data;
+    this->ora = ora;
     this->nrOferte = nrOferte;
-    this->oferte = new Oferta[nrOferte];
 }
 Programare::Programare(vector<string> P)
 {

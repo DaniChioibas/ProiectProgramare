@@ -8,6 +8,7 @@ class Ora
     int minute;
 
 public:
+    Ora(string);
     Ora();
     Ora(int, int);
     int getOra();
@@ -15,8 +16,26 @@ public:
     void setMinute(int x);
     void setOra(int x);
     friend ostream &operator<<(ostream &, const Ora &);
+    Ora &operator=(const Ora &other)
+    {
+        if (this != &other)
+        {
+            this->ora = other.ora;
+            this->minute = other.minute;
+        }
+        return *this;
+    }
 };
+Ora::Ora(string timp)
+{
+    size_t colonPos = timp.find(':');
 
+    string hourString = timp.substr(0, colonPos);
+    this->ora = stoi(hourString);
+
+    string minuteString = timp.substr(colonPos + 1);
+    this->minute = stoi(minuteString);
+}
 Ora::Ora()
 {
     this->ora = 0;
