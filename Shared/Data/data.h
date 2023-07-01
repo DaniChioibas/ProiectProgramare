@@ -37,7 +37,12 @@ public:
         return *this;
     }
     friend bool operator<(const Data &, const Data &);
+    friend bool operator==(const Data &l, const Data &);
 };
+bool operator==(const Data &lhs, const Data &rhs)
+{
+    return lhs.zi == rhs.zi && lhs.luna == rhs.luna && lhs.an == rhs.an;
+}
 bool operator<(const Data &lhs, const Data &rhs)
 {
     if (lhs.an < rhs.an)

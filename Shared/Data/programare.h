@@ -21,6 +21,10 @@ public:
     {
         return this->data;
     }
+    Ora getOra()
+    {
+        return this->ora;
+    }
     void adaugaOferta(Oferta *tmp)
     {
         this->oferte.push_back(tmp);

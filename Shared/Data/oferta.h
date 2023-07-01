@@ -18,6 +18,11 @@ public:
         istringstream iss(inputString);
         iss >> id >> nume >> durata >> pret;
     }
+    friend std::ostream &operator<<(std::ostream &os, const Oferta &oferta)
+    {
+        os << oferta.id << " " << oferta.nume << " " << oferta.durata << " " << oferta.pret;
+        return os;
+    }
     void afisare()
     {
         cout << this->id << " " << this->nume << " " << this->durata << " " << this->pret;

@@ -25,7 +25,12 @@ public:
         }
         return *this;
     }
+    friend bool operator==(const Ora &, const Ora &);
 };
+bool operator==(const Ora &lhs, const Ora &rhs)
+{
+    return lhs.ora == rhs.ora && lhs.minute == rhs.minute;
+}
 Ora::Ora(string timp)
 {
     size_t colonPos = timp.find(':');
